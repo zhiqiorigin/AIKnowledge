@@ -1,0 +1,87 @@
+// 设置默认的 html 和 body 样式
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+* {
+  // 继承 html 的盒模型
+  box-sizing: inherit;
+
+  // 撤销默认样式（可选）
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+
+body {
+  font-family: ailimama, Arial, sans-serif; // 或者你常用的字体
+  color: #333;
+  background-color: #f8f9fa;
+
+  // 全局容器样式（可选）
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+}
+
+// 基本布局模块
+.layout {
+  display: flex;
+
+  &.column {
+    flex-direction: column;
+  }
+
+  &.between {
+    justify-content: space-between;
+  }
+}
+
+// 列表样式
+.list {
+  list-style: none; // 移除默认的列表样式
+  padding-left: 0;
+
+  // 如果你希望 `li` 左对齐，可以添加以下内容：
+  li {
+    margin-bottom: 10px; // 或者其他间距
+    padding: 5px 0;
+    line-height: 1.6;
+
+    &.left-aligned {
+      text-align: left;
+    }
+  }
+
+  // 如果你希望 `li` 左边没有小方块或其他样式，可以添加：
+  li::before,
+  li::after {
+    content: none;
+  }
+}
+
+// 链接样式（去掉底部下划线）
+a {
+  color: inherit; // 继承父元素颜色
+  text-decoration: none; // 去掉链接下划线
+  transition: all 0.3s ease;
+
+  &:hover,
+  &:active {
+    color: #666;
+  }
+
+  // 如果你希望链接在 hover 时有其他效果，可以扩展：
+  &.link-hover {
+    text-decoration: underline; // 或者其他效果
+  }
+}
+
+
+

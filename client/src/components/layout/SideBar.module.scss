@@ -1,0 +1,162 @@
+/* 搜索框 */
+.searchBox {
+  padding: 12px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1.5px solid $input-bg;
+
+  // 设置 placeholder 颜色
+  &::placeholder {
+    color: $input-bg;
+    opacity: 1; // Firefox 默认会将 opacity 设置为 0.54，这里强制设置为 1
+  }
+
+  // 兼容旧版 Webkit 浏览器（如 Safari 和 Chrome）
+  &::-webkit-input-placeholder {
+    color: $input-bg;
+  }
+
+  // 兼容旧版 Mozilla 浏览器（如 Firefox）
+  &:-moz-placeholder {
+    color: $input-bg;
+    opacity: 1;
+  }
+
+  // 兼容较新版 Mozilla 浏览器（如 Firefox）
+  &::-moz-placeholder {
+    color: $input-bg;
+    opacity: 1;
+  }
+
+  // 兼容旧版 Internet Explorer 浏览器
+  &:-ms-input-placeholder {
+    color: $input-bg;
+  }
+}
+
+/* 个人资料区域 */
+.profileBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px 32px 16px;
+}
+
+.profileLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background-color: $avatar-bg;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-weight: 500;
+  font-size: 1em;
+  color:$text-primary;
+}
+
+.userStatus {
+  font-size: 0.6em;
+  color: $state-success;
+}
+
+.moreButton {
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  color: $text-primary;
+}
+
+/* 静态列表 */
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* 菜单项之间的间距 */
+  li {
+    margin: 0 12px;
+    color: $text-primary;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 6px 20px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    display: flex;
+    align-items: center; /* 图标和文字对齐 */
+    gap: 8px; /* 图标和文字之间的间距 */
+    // 悬停效果
+    &:hover {
+      background-color: $primary-hover-color;
+      color: $text-hover-color;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+  }
+}
+
+/* active 状态 */
+.active {
+  background-color: $primary-hover-color;
+  color: #fff!important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+
+// 调整标题布局
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+
+/* 图标样式 */
+.iconfont {
+  font-size: 18px; /* 根据需要调整图标大小 */
+  padding: 0 8px; /* 图标和文字之间的间距 */
+}
+
+// 折叠图标样式
+.collapseIcon {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  margin-right: 8px;
+
+  &.collapsed {
+    transform: rotate(-90deg);
+  }
+}
+
+// 折叠菜单样式
+
+
+.collapsedMenu {
+  max-height: 0 !important;
+  opacity: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: all 0.3s ease;
+}
+
+
+

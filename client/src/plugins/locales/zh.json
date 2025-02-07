@@ -1,0 +1,40 @@
+{
+  "translation": {
+    "navbar": {
+      "navbarName": "金志旗的博客",
+      "home": "首页",
+      "login": "登录",
+      "article": "文章",
+      "recentupdate": "最近更新",
+      "ai": "AI",
+      "search": "搜索...",
+      "knowledgeBase": "个人知识库"
+    },
+    "home": {
+      "name": "金志旗",
+      "desc": "没事就真的没有事",
+      "introduction": "分享一点前端开发知识"
+    },
+    "footer": {},
+    "common": {
+      "copied": "复制成功了"
+    },
+    "button": {
+      "comfirm": "确认",
+      "cancel": "取消"
+    },
+    "placeholder": {
+      "default": "请选择"
+    },
+    "pagination": {
+      "first": "首页",
+      "last": "尾页",
+      "goto": "前往",
+      "page": "页面",
+      "total_page": "共",
+      "end_page": "页",
+      "current_page": "第",
+      "of_page": "页，共"
+    }
+  }
+}

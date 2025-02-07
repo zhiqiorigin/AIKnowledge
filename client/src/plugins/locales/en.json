@@ -1,0 +1,40 @@
+{
+  "translation": {
+    "navbar": {
+      "navbarName": "Ziky Blog",
+      "home": "Home",
+      "login": "Login",
+      "article": "Article",
+      "recentupdate": "Recent Update",
+      "ai": "AI",
+      "search": "search...",
+      "knowledgeBase": "personal knowledgebase"
+    },
+    "home": {
+      "name": "Ziky Jin",
+      "desc": "Don't know how to descirbe it",
+      "introduction": "share a little bit knowledege about front end development"
+    },
+    "footer": {},
+    "common": {
+      "copied": "Copied successfully"
+    },
+    "button": {
+      "comfirm": "Confirm",
+      "cancel": "Cancel"
+    },
+    "placeholder": {
+      "default": "Please select"
+    },
+    "pagination": {
+      "first": "First",
+      "last": "Last",
+      "goto": "Goto",
+      "page": "Page",
+      "total_page": "Total Page",
+      "end_page": "",
+      "current_page": "Page",
+      "of_page": "of"
+    }
+  }
+}

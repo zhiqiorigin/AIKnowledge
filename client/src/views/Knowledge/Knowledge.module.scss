@@ -1,0 +1,79 @@
+.knowledgeContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .loading {
+    text-align: center;
+    font-size: 18px;
+    color: #6c757d;
+  }
+  
+  .knowledgeHeader {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-bottom: 1px solid #dee2e6;
+  
+    h1 {
+      margin: 0 0 10px 0;
+      color: #333;
+      font-size: 24px;
+      font-weight: 600;
+    }
+  
+    p {
+      margin: 0;
+      color: #6c757d;
+      font-size: 16px;
+    }
+  }
+  
+  .articlesList {
+    padding: 20px;
+  
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 20px;
+      font-weight: 600;
+    }
+  
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+  
+    .articleItem {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 15px;
+      padding: 15px;
+      transition: box-shadow 0.3s;
+  
+      &:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+  
+      h3 {
+        margin: 0 0 10px 0;
+        color: #333;
+        font-size: 18px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+  
+        &:hover {
+          color: #0984e3;
+        }
+      }
+  
+      p {
+        margin: 0;
+        color: #6c757d;
+        font-size: 14px;
+      }
+    }
+  }

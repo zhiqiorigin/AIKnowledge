@@ -1,0 +1,20 @@
+$themes: (
+  light: (
+    bg-color: #ffffff,
+    text-color: #333333,
+  ),
+  dark: (
+    bg-color: #1a1a1a,
+    text-color: #f0f0f0,
+  ),
+);
+
+@mixin theme($name) {
+  @each $theme-name, $theme-vars in $themes {
+    [data-theme='#{$theme-name}'] & {
+      @if $name == $theme-name {
+        @content ($theme-vars);
+      }
+    }
+  }
+}

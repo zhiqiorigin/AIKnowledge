@@ -1,19 +1,27 @@
 import { defineConfig } from 'vite';
 // import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
-import react from '@vitejs/plugin-react';
+import React from '@vitejs/plugin-react';
 import path from 'path'; // 如果编辑器提示 path 模块找不到，则可以安装一下 @types/node -> pnpm i @types/node -D
 
-function resolve(dir: string) {
-  return path.join(__dirname, '.', dir);
-}
+
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [React()],
   // 配置别名
   resolve: {
     alias: {
-      '@': resolve('src'), // 设置 `@` 指向 `src` 目录
+      '@': path.join(__dirname,'./src'), // 设置 `@` 指向 `src` 目录
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+          @import "@/styles/variables.scss";
+          @import "@/styles/mixins.scss";
+        `
+      }
+    }
+  }
 });
