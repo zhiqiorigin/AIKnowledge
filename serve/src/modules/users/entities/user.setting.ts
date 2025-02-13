@@ -34,7 +34,7 @@ export class UserSetting {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @OneToOne(() => User, (user) => user.profiles) // 关联到 User 实体
+  @OneToOne(() => User, (user) => user.profile) // 关联到 User 实体
   @JoinColumn({ name: 'user_id' })
   user: User;
 }

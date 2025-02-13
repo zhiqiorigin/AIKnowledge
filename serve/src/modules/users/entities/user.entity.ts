@@ -6,9 +6,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToOne,
+  OneToMany
 } from 'typeorm';
+import { Todo } from '@/modules/todo/entities/todo.entity';
 import { UserProfile } from './userProfile.entity';
-import { UserSetting } from './user.setting';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -19,6 +20,7 @@ export class User {
 
   @Column({ length: 255, unique: true, nullable: true })
   email: string;
+
 
   @Column({ length: 255, nullable: false })
   password: string; // 使用强加密算法存储
@@ -42,8 +44,6 @@ export class User {
   isActive: boolean;
 
   @OneToOne(() => UserProfile, (profile) => profile.user)
-  profiles: UserProfile[];
-
-  // @OneToOne(() => UserSetting, setting => setting.user)
-  // settings: UserSetting[];
+  profile: UserProfile;
+  
 }

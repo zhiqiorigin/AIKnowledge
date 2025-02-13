@@ -2,6 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt'; // 确保正确导入 bcrypt
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -25,9 +26,13 @@ export class AuthService {
     }
 
     // 创建 JWT payload
-    const payload = { sub: user!.id, username: user!.username };
+    const payload = { id: user!.id, username: user!.username,role: user!.role };
+
+    // 设置 token 的有效期为 7 天
+    const options = { expiresIn: '7d' };
+
     return {
-      access_token: await this.jwtService.signAsync(payload),
+      access_token: await this.jwtService.signAsync(payload, options),
     };
   }
 }

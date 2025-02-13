@@ -8,6 +8,7 @@ import {
   Body,
   UseGuards,
   Request,
+  UseInterceptors
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto, UserProfileDto } from './dto/create-user.dto';
@@ -15,10 +16,12 @@ import { UpdateUserDto, UpdatePasswordDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity'; // 假设有一个User实体类
 import { AdminGuard } from '../auth/guard/admin.guard'; // 假设有AuthGuard和AdminGuard守卫
 import { AuthGuard } from './../auth/guard/auth.guard';
-
+import { Logger } from '@nestjs/common';
 @Controller('users')
+
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
+  private readonly logger = new Logger(UsersService.name);
 
   @Post('')
   async createUser(
@@ -49,14 +52,14 @@ export class UsersController {
   async changePassword(
     @Body() changePasswordDto: UpdatePasswordDto,
     @Request() req,
-  ): Promise<void> {
+  ): Promise<any> {
     const userId = parseInt(req.user.id, 10);
     // 假设有验证旧密码的机制
-    await this.usersService.updatePassword(userId, changePasswordDto);
+    return this.usersService.updatePassword(userId, changePasswordDto);
   }
 
   @UseGuards(AdminGuard)
-  @Get('/')
+  @Get('/list')
   async getAllUsers(): Promise<User[]> {
     return this.usersService.findAll();
   }
@@ -69,7 +72,7 @@ export class UsersController {
   }
 
   @UseGuards(AdminGuard)
-  @Patch('/:id')
+  @Patch('/profile/:id')
   async updateUser(
     @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
@@ -79,9 +82,11 @@ export class UsersController {
   }
 
   @UseGuards(AdminGuard)
-  @Delete('/:id')
+  @Delete('/delete/:id')
   async deleteUser(@Param('id') id: string): Promise<void> {
+    this.logger.debug(`id:${id}`)
     const userId = parseInt(id, 10);
-    await this.usersService.remove(userId);
+    // 这里可以根据需要进一步处理用户信息
+    return await this.usersService.remove(userId);
   }
 }

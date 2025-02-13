@@ -8,10 +8,12 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { jwtConstants } from '../constants';
 import { Request } from 'express';
-import { UsersService } from '../../users/users.service';
+import { Logger } from '@nestjs/common';
+
 @Injectable()
 export class AdminGuard implements CanActivate {
   constructor(private jwtService: JwtService) {}
+  private readonly logger = new Logger(AdminGuard.name);
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
@@ -28,10 +30,18 @@ export class AdminGuard implements CanActivate {
       });
 
       // 将 payload 赋值给 request 对象以便在路由处理器中使用
+      /**
+       * payload:{
+       *  id
+       *  username
+       *  role
+       * }
+       */
       request['user'] = payload;
-
+      
       // 检查用户是否存在并且角色为 admin
       const user = request.user;
+      this.logger.log(user)
       if (user && user.role === 'admin') {
         return true;
       } else {

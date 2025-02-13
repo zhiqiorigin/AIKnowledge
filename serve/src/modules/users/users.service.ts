@@ -1,15 +1,13 @@
+
 import { Injectable, Inject } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto, UpdatePasswordDto } from './dto/update-user.dto';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { UserProfile } from './entities/userProfile.entity';
-import {
-  USER_REPOSITORY,
-  USER_PROFILE_REPOSITORY,
-} from '../../constants/common.constants';
+import { USER_REPOSITORY, USER_PROFILE_REPOSITORY } from '../../constants/common.constants';
 import * as bcrypt from 'bcrypt'; // 确保正确导入 bcrypt
-
+import { Logger } from '@nestjs/common';
 @Injectable()
 export class UsersService {
   constructor(
@@ -17,7 +15,8 @@ export class UsersService {
     private userRepository: Repository<User>,
     @Inject(USER_PROFILE_REPOSITORY)
     private userProfileRepository: Repository<UserProfile>, // 注入 UserProfile 的 Repository
-  ) {}
+  ) { }
+  private readonly logger = new Logger(UsersService.name);
   // 创建用户
   async create(createUserDto: CreateUserDto): Promise<User> {
     const hashedPassword = await bcrypt.hash(createUserDto.password, 12);
@@ -48,6 +47,7 @@ export class UsersService {
   }
   // 查询用户
   async findOne(id: number): Promise<User | undefined> {
+    this.logger.debug(`Fetching user with ID: ${id}`);
     const user = await this.userRepository.findOne({
       where: { id },
       relations: ['profile'], // 加载关联的 UserProfile
@@ -58,14 +58,12 @@ export class UsersService {
   async findByName(username: string): Promise<User | undefined> {
     const user = await this.userRepository.findOne({
       where: { username },
+      relations: ['profile'], // 加载关联的 UserProfile
     });
     return user ? user : undefined;
   }
   // 更新用户
-  async update(
-    id: number,
-    updateUserDto: UpdateUserDto,
-  ): Promise<User | undefined> {
+  async update(id: number, updateUserDto: UpdateUserDto): Promise<User | undefined> {
     const user = await this.userRepository.findOneBy({ id });
 
     if (!user) {
@@ -95,7 +93,7 @@ export class UsersService {
     return await this.findOne(id); // 返回更新后的用户数据
   }
   // 删除用户
-  async remove(id: number): Promise<void> {
+  async remove(id: number): Promise<any> {
     const user = await this.userRepository.findOneBy({ id });
 
     if (!user) {
@@ -111,13 +109,10 @@ export class UsersService {
       await this.userProfileRepository.remove(userProfile);
     }
 
-    await this.userRepository.delete(id);
+    return await this.userRepository.delete(id);
   }
   // 新增方法 - 更新密码
-  async updatePassword(
-    id: number,
-    updatePasswordDto: UpdatePasswordDto,
-  ): Promise<User> {
+  async updatePassword(id: number, updatePasswordDto: UpdatePasswordDto): Promise<User> {
     const user = await this.userRepository.findOne({
       where: { id },
     });
@@ -127,24 +122,15 @@ export class UsersService {
     }
 
     // 检查旧密码是否正确
-    const oldPasswordCorrect = await bcrypt.compare(
-      updatePasswordDto.oldPassword,
-      user.password,
-    );
-
-    if (!oldPasswordCorrect.verified) {
+    const oldPasswordCorrect = await bcrypt.compare(updatePasswordDto.oldPassword, user.password);
+    this.logger.log(oldPasswordCorrect)
+    if (!oldPasswordCorrect) {
       throw new Error('旧密码错误'); // 或者返回一个错误响应
     }
-
     // 生成新哈希密码
-    const newPasswordHash = await bcrypt.hash(
-      updatePasswordDto.newPassword,
-      12,
-    );
-
+    const newPasswordHash = await bcrypt.hash(updatePasswordDto.newPassword, 12);
     // 更新用户的密码
     this.userRepository.update(id, { password: newPasswordHash });
-
     return user;
   }
 }

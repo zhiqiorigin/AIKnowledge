@@ -40,7 +40,7 @@ export class UserProfile {
   @Column({ length: 255, nullable: true })
   location: string; // 新增字段：位置
 
-  @OneToOne(() => User, (user) => user.profiles) // 关联到 User 实体
+  @OneToOne(() => User, (user) => user.profile) // 关联到 User 实体
   @JoinColumn({ name: 'user_id' })
   user: User;
 }
