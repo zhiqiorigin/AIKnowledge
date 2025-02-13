@@ -14,11 +14,10 @@ export default function ChatInterface() {
 
   // 辅助问题列表
   const assistantQuestions = [
-    "什么是React?",
-    "如何使用useState?",
-    "什么是Hooks?",
-    "如何创建一个简单的React应用?",
-    "如何处理异步操作?"
+    { category: "💡 建议", questions: ["如何优化React组件性能？", "React项目结构的最佳实践"] },
+    { category: "❓ 核心问题", questions: ["什么是React?", "如何使用useState?", "什么是Hooks?", "如何创建一个简单的React应用?", "如何处理异步操作?"] },
+    { category: "✍️ 创作助手", questions: ["生成React组件模板代码", "编写一个自定义Hook示例"] },
+    { category: "🌪️ 头脑风暴", questions: ["设计一个状态管理方案", "实现动态表单的多种方式"] }
   ];
 
   // 发送消息
@@ -76,11 +75,18 @@ export default function ChatInterface() {
       {/* 辅助问题盒子 */}
       {!messages.length && (
         <div className={styles.assistantQuestionsBox}>
-          <h2>常见问题</h2>
-          <ul>
-            {assistantQuestions.map((question, index) => (
-              <li key={index} onClick={() => handleQuestionClick(question)}>
-                {question}
+          <h3 className={styles.assistantTitle}>Ziky，你好呀！今天我能为你做些什么？</h3>
+          <ul className={styles.questionCategories}>
+            {assistantQuestions.map((category, index) => (
+              <li key={index} className={styles.categorySection}>
+                <div className={styles.categoryHeader}>{category.category}</div>
+                <ul className={styles.questionList}>
+                  {category.questions.map((question, qIndex) => (
+                    <li key={qIndex} onClick={() => handleQuestionClick(question)}>
+                      {question}
+                    </li>
+                  ))}
+                </ul>
               </li>
             ))}
           </ul>

@@ -38,15 +38,27 @@ export default function RecentUpdates() {
   return (
     <div className={styles.recentUpdates}>
       {/* 顶部操作栏 */}
+      <h1>新建</h1>
       <div className={styles.topBar}>
-        <h1>最近更新</h1>
-        <button onClick={handleCreateNewKnowledgeBase}>新建知识库</button>
-        <button onClick={() => setNewDocumentName('')}>新建文档</button>
-      </div>
+            <button className={styles.actionButton} onClick={handleCreateNewKnowledgeBase}>
+                <i className="iconfont">&#xe6e9;</i> {/* 替换为实际的知识库图标 */}
+                <div className={styles.contentBox}>
+                    <h3>新建知识库</h3>
+                    <p>文档，表格</p>
+                </div>
+            </button>
+            <button className={styles.actionButton} onClick={() => setNewDocumentName('')}>
+                <i className="iconfont">&#xe6e9;</i> {/* 替换为实际的文档图标 */}
+                <div className={styles.contentBox}>
+                    <h3>新建文档</h3>
+                    <p>文档，表格</p>
+                </div>
+            </button>
+        </div>
 
       {/* 主内容区 */}
       <div className={styles.mainContent}>
-        <h3>最近编写过的文档</h3>
+        <h3>文档</h3>
         <div className={styles.documentsList}>
           {documents.map((doc) => (
             <div key={doc.id} className={styles.documentItem}>

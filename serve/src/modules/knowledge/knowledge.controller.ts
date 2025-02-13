@@ -34,13 +34,6 @@ export class KnowledgeController {
   }
 
   @UseGuards(AuthGuard)
-  @Get(':id')
-  async findOne(@Param('id') id: string, @Request() req): Promise<Knowledge | undefined> {
-    const knowledgeId = parseInt(id, 10);
-    return this.knowledgeService.findOne(knowledgeId, req.user.id);
-  }
-
-  @UseGuards(AuthGuard)
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateKnowledgeDto: UpdateKnowledgeDto, @Request() req): Promise<Knowledge | undefined> {
     const knowledgeId = parseInt(id, 10);
@@ -53,5 +46,11 @@ export class KnowledgeController {
     this.logger.debug(`Deleting knowledge entry with id: ${id}`);
     const knowledgeId = parseInt(id, 10);
     await this.knowledgeService.remove(knowledgeId, req.user.id);
+  }
+  @UseGuards(AuthGuard)
+  @Get(':id')
+  async findOne(@Param('id') id: string, @Request() req): Promise<Knowledge | undefined> {
+    const knowledgeId = parseInt(id, 10);
+    return this.knowledgeService.findOne(knowledgeId, req.user.id);
   }
 }

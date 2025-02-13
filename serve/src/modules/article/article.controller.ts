@@ -35,13 +35,6 @@ export class ArticleController {
   }
 
   @UseGuards(AuthGuard)
-  @Get(':id')
-  async findOne(@Param('id') id: string, @Request() req): Promise<Article | undefined> {
-    const articleId = parseInt(id, 10);
-    return this.articlesService.findOne(articleId, req.user.id);
-  }
-
-  @UseGuards(AuthGuard)
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateArticleDto: UpdateArticleDto, @Request() req): Promise<Article | undefined> {
     const articleId = parseInt(id, 10);
@@ -55,6 +48,14 @@ export class ArticleController {
     const articleId = parseInt(id, 10);
     await this.articlesService.remove(articleId, req.user.id);
   }
+
+  @UseGuards(AuthGuard)
+  @Get(':id')
+  async findOne(@Param('id') id: string, @Request() req): Promise<Article | undefined> {
+    const articleId = parseInt(id, 10);
+    return this.articlesService.findOne(articleId, req.user.id);
+  }
+
 }
 
 

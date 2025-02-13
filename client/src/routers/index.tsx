@@ -9,7 +9,8 @@ const AI = lazy(() => import('@/views/AI'));
 const Login = lazy(()=> import('@/views/Constant/Login'))
 const Register = lazy(()=> import('@/views/Constant/Register'))
 const Knowledge = lazy(()=> import('@/views/Knowledge/Knowledge'))
-
+const ArticleHome = lazy(()=> import('@/views/Article/Home'))
+const ArticleDetail = lazy(()=> import('@/views/Article/ArticleDetail'))
 /**
  * 公共路由
  */
@@ -36,20 +37,30 @@ const constantRoutes: RouteObject[] = [
     children: [
       // 其他子路由配置
       {
-        path: '/:locale/home',
+        path: 'home',
         element: <Home />,
       },
       {
-        path: "/:locale/recentupdate",
+        path: 'recentupdate',
         element: <RecentUpdate />,
       },
       {
-        path: "/:locale/ai",
+        path: 'ai',
         element: <AI />,
       },
       {
-        path: "/:locale/knowledge/:knowledgeId",
+        path: 'knowledge/:knowledgeId',
         element: <Knowledge />,
+        children: [
+          {
+            index: true,
+            element: <ArticleHome />, // 默认显示首页
+          },
+          {
+            path: 'articles/:articleId',
+            element: <ArticleDetail />,
+          },
+        ],
       },
     ],
   },

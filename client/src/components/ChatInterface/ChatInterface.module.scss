@@ -105,3 +105,77 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+
+.assistantQuestionsBox {
+  padding: 15px;
+  background: #FAFAFA;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 15px auto;
+  max-height: 400px; /* 设置最大高度 */
+  overflow-y: auto; /* 添加垂直滚动条 */
+
+  /* WebKit browsers (Chrome, Safari) */
+  &::-webkit-scrollbar {
+    width: 1px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 1px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2); /* 更深的半透明黑色 */
+  }
+}
+
+.assistantTitle {
+  color: #808080;
+  font-size: 0.9em;
+  margin-bottom: 0.5rem; /* 减少底部外边距 */
+  text-align: left;
+}
+
+.questionCategories {
+  display: flex;
+  flex-direction: column; /* 上下布局 */
+  font-size: 0.8em;
+  .categorySection {
+    background: white;
+    border-radius: 8px;
+    list-style: none;
+    .categoryHeader {
+      font-weight: 500;
+      color: #2d3436;
+      margin-bottom: 6px; /* 减少底部外边距 */
+      display: flex;
+      align-items: center;
+    }
+    
+    .questionList {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      li {
+        padding: 4px 6px; /* 减少内边距 */
+        margin: 4px 0; /* 减少项目之间的间隔 */
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        color: #4a4a4a;
+        background: #f8f9fa;
+        &:hover {
+          background: $primary-color;
+          color: white;
+          transform: translateX(5px);
+        }
+      }
+    }
+  }
+}

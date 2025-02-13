@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './auth.scss'
+import './auth.scss';
+import Link from '@/components/Link';
+
 interface RegisterProps {
     // 如果有需要，可以在这里定义 props
 }
@@ -24,49 +26,42 @@ const RegisterComponent: React.FC<RegisterProps> = () => {
     return (
         <div className="auth-container">
             <div className="auth-wrapper">
-                <h2>注册</h2>
+                {/* <img src="https://img.alicdn.com/tfs/TB1yhoIXHzqK1RjSZFgXXa7JXXa-200-200.png" alt="Product Logo" className="product-logo" /> */}
+                <h1>Register</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="input-group">
-                        <label htmlFor="username">用户名：</label>
                         <input
                             type="text"
-                            id="username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                            placeholder="请输入你的用户名"
+                            placeholder="用户名"
                             required
                         />
                     </div>
                     <div className="input-group">
-                        <label htmlFor="email">邮箱：</label>
                         <input
                             type="email"
-                            id="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder="请输入你的邮箱地址"
+                            placeholder="邮箱地址"
                             required
                         />
                     </div>
                     <div className="input-group">
-                        <label htmlFor="password">密码：</label>
                         <input
                             type="password"
-                            id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            placeholder="请输入密码"
+                            placeholder="密码"
                             required
                         />
                     </div>
                     <div className="input-group">
-                        <label htmlFor="confirm-password">确认密码：</label>
                         <input
                             type="password"
-                            id="confirm-password"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
-                            placeholder="请再次输入密码"
+                            placeholder="确认密码"
                             required
                         />
                     </div>
@@ -81,9 +76,9 @@ const RegisterComponent: React.FC<RegisterProps> = () => {
                         </label>
                     </div>
                     <button type="submit" className="btn">注册</button>
-                    <a href="/login" className="switch-to-login">
+                    <Link to="/login" className="switch-to-login">
                         已有账号？去登录
-                    </a>
+                    </Link>
                 </form>
             </div>
         </div>

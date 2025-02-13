@@ -1,0 +1,17 @@
+/* Home.module.scss */
+.homeContainer {
+    padding: 20px;
+  
+    .knowledgeIntro {
+      margin-bottom: 20px;
+    }
+  
+    .articlesList ul {
+      list-style-type: none;
+      padding: 0;
+  
+      li {
+        margin-bottom: 10px;
+      }
+    }
+  }

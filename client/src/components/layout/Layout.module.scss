@@ -1,8 +1,9 @@
 /* Layout.module.css */
 .layoutContainer {
   display: flex;
-  min-height: 100vh;
+  min-height: 100vh; /* 确保布局容器至少占据整个视窗高度 */
   position: relative;
+  overflow: hidden; /* 防止layoutContainer产生滚动条 */
 }
 
 .sidebar {
@@ -14,9 +15,9 @@
 
 .contentArea {
   flex: 1;
-  padding: 2rem;
-  overflow: auto;
+  overflow-y: auto; /* 仅内容区可垂直滚动 */
   background: white;
+  max-height: calc(100vh); /* 根据padding调整最大高度 */
 }
 
 .loading {
@@ -57,5 +58,6 @@
   .contentArea {
     padding: 1rem;
     padding-top: 4rem;
+    max-height: calc(100vh - 5rem); /* 调整移动端的最大高度 */
   }
 }
