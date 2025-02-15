@@ -1,13 +1,14 @@
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import Router from './routers';
 import styles from './App.module.scss'
+
 
 const App = () => {
   return (
     <div className={styles.appContainer}>
-      <HashRouter>
+      <BrowserRouter>
         <Router />
-      </HashRouter>
+      </BrowserRouter>
     </div>
   );
 };

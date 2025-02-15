@@ -3,28 +3,42 @@ import { useNavigate } from 'react-router-dom';
 import './auth.scss';
 import Link from '@/components/Link';
 
-interface LoginProps {
-    // 如果有需要，可以在这里定义 props
-}
+import { loginDataType } from '@/types/user';
+import { postLoginAPI } from '@/api/user'; // 导入 postLoginAPI
 
-const LoginComponent: React.FC<LoginProps> = () => {
+const LoginComponent: React.FC = () => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const navigate = useNavigate();
+    const [error, setError] = useState<string>('');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // 处理登录逻辑
-        console.log('登录信息:', { username, password });
-        // 这里可以添加你的后端调用代码
-        navigate('/'); // 登录成功后的跳转
+        const loginData: loginDataType = { username, password };
+        try {
+            const response = await postLoginAPI(loginData);
+            if (response && response.access_token) {
+                console.log('登录成功:', response);
+                localStorage.setItem('token', response.access_token);
+                navigate('/');
+            } else {
+                setError('登录失败：服务器返回数据格式不正确');
+            }
+        } catch (err: any) {
+            console.error('登录失败:', err);
+            setError(err.message || '用户名或密码错误');
+        }
     };
 
     return (
         <div className="auth-container">
             <div className="auth-wrapper">
-                {/* <img src="https://img.alicdn.com/tfs/TB1yhoIXHzqK1RjSZFgXXa7JXXa-200-200.png" alt="Product Logo" className="product-logo" /> */}
-                <h1>Login</h1>
+                <img 
+                    src="/path-to-your-logo.png" 
+                    alt="Logo" 
+                    className="auth-logo" 
+                />
+                <h1>登录</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="input-group">
                         <input
@@ -44,6 +58,7 @@ const LoginComponent: React.FC<LoginProps> = () => {
                             required
                         />
                     </div>
+                    {error && <p className="error-message">{error}</p>}
                     <button type="submit" className="btn">登录</button>
                     <Link to="/register" className="switch-to-register">
                         没有账号？去注册
@@ -58,6 +73,3 @@ const LoginComponent: React.FC<LoginProps> = () => {
 };
 
 export default LoginComponent;
-
-
-

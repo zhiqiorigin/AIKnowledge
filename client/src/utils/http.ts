@@ -24,15 +24,15 @@ const get = <T>(
   params?: string | object,
   config?: AxiosRequestConfig
 ): Promise<CustomSuccessData<T>> => {
-  config = {
+  const mergedConfig: AxiosRequestConfig = {
     method: 'get', // `method` 是创建请求时使用的方法
     url, // `url` 是用于请求的服务器 URL
     ...config,
   };
   if (params) {
-    config.params = params;
+    mergedConfig.params = params;
   }
-  return request(config);
+  return request(mergedConfig);
 };
 
 /**
@@ -47,15 +47,15 @@ const post = <T>(
   data?: string | object,
   config?: AxiosRequestConfig
 ): Promise<CustomSuccessData<T>> => {
-  config = {
+  const mergedConfig: AxiosRequestConfig = {
     method: 'post',
     url,
     ...config,
   };
   if (data) {
-    config.data = data;
+    mergedConfig.data = data;
   }
-  return request(config);
+  return request(mergedConfig);
 };
 
 /**
@@ -70,15 +70,15 @@ const patch = <T>(
   data?: string | object,
   config?: AxiosRequestConfig
 ): Promise<CustomSuccessData<T>> => {
-  config = {
+  const mergedConfig: AxiosRequestConfig = {
     method: 'patch',
     url,
     ...config,
   };
   if (data) {
-    config.data = data;
+    mergedConfig.data = data;
   }
-  return request(config);
+  return request(mergedConfig);
 };
 
 /**
@@ -93,15 +93,15 @@ const remove = <T>(
   params?: string | object,
   config?: AxiosRequestConfig
 ): Promise<CustomSuccessData<T>> => {
-  config = {
+  const mergedConfig: AxiosRequestConfig = {
     method: 'delete',
     url,
     ...config,
   };
   if (params) {
-    config.params = params;
+    mergedConfig.params = params;
   }
-  return request(config);
+  return request(mergedConfig);
 };
 
 // 包裹请求方法的容器,使用 http 统一调用
@@ -113,3 +113,30 @@ const http = {
 };
 
 export default http;
+
+
+// // 使用案例
+// (async () => {
+//   try {
+//     // GET 请求示例
+//     const userData = await http.get<{ id: number; name: string }>('/api/user', { userId: 1 });
+//     console.log('GET Response:', userData);
+
+//     // POST 请求示例
+//     const postData = await http.post<{ success: boolean }>('/api/data', { key: 'value' });
+//     console.log('POST Response:', postData);
+
+//     // PATCH 请求示例
+//     const patchData = await http.patch<{ success: boolean }>('/api/data/1', { key: 'new_value' });
+//     console.log('PATCH Response:', patchData);
+
+//     // DELETE 请求示例
+//     const deleteData = await http.remove<{ success: boolean }>('/api/data/1');
+//     console.log('DELETE Response:', deleteData);
+//   } catch (error) {
+//     console.error('Request failed:', error);
+//   }
+// })();
+
+
+

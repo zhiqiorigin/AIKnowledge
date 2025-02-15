@@ -23,10 +23,11 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
   private readonly logger = new Logger(UsersService.name);
 
-  @Post('')
+  @Post('/')
   async createUser(
     @Body() createUserDto: CreateUserDto,
   ): Promise<User | undefined> {
+    this.logger.debug(`createUserDto:${createUserDto}`)
     return this.usersService.create(createUserDto);
   }
 

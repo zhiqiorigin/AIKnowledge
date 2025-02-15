@@ -19,10 +19,10 @@ export class TodosService {
     try {
       this.logger.log(`Creating a new todo with data: ${JSON.stringify(createTodoDto)} and user ID: ${userId}`);
 
-      // 创建新的TODO实体
+      // 创建新的TODO实体，如果没有指定 assigned_to，则使用创建者的 ID
       const todo = this.todoRepository.create({
         ...createTodoDto,
-        assigned_to: createTodoDto.assigned_to,
+        assigned_to: createTodoDto.assigned_to || userId, // 如果没有指定 assigned_to，则默认分配给创建者
         created_by: userId,
       });
 

@@ -11,7 +11,7 @@ export default defineConfig({
   // 配置别名
   resolve: {
     alias: {
-      '@': path.join(__dirname,'./src'), // 设置 `@` 指向 `src` 目录
+      '@': path.join(__dirname,'./src'), // 设置 `@` 指向 `src` 目录  
     },
   },
   css: {
@@ -23,5 +23,14 @@ export default defineConfig({
         `
       }
     }
-  }
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000', // 后端服务地址
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''), // 重写路径
+      },
+    },
+  },
 });

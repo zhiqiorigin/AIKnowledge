@@ -15,9 +15,24 @@
 
 .contentArea {
   flex: 1;
-  overflow-y: auto; /* 仅内容区可垂直滚动 */
+  overflow-y: auto;
   background: white;
-  max-height: calc(100vh); /* 根据padding调整最大高度 */
+  height: 100vh;
+  min-width: 0;
+  width: calc(100% - 260px); /* 减去侧边栏宽度 */
+  margin-left: 260px; /* 与侧边栏宽度相同 */
+  position: relative; /* 确保定位正确 */
+  box-sizing: border-box;
+  
+  @media (max-width: 1024px) {
+    width: calc(100% - 220px); /* 平板设备减去较窄的侧边栏宽度 */
+    margin-left: 220px;
+  }
+  
+  @media (max-width: 768px) {
+    width: 100%; /* 移动端占满全宽 */
+    margin-left: 0;
+  }
 }
 
 .loading {
